@@ -2,8 +2,12 @@ import React from 'react';
 import {Global, css} from '@emotion/core';
 import Header from './header';
 import { Helmet } from 'react-helmet';
+import useSiteMetadata from '../hooks/setmetadata';
 
-const Layout = ({ children }) => (
+const Layout = ({ children }) => {
+    const {title, description} = useSiteMetadata();
+
+    return (
     <>
         <Global 
             styles={css`
@@ -55,8 +59,8 @@ const Layout = ({ children }) => (
         />
         <Helmet>
             <html lang = 'en' />
-            <title>FAM</title>
-            <meta name='description' content='site description' />
+            <title>{title}</title>
+            <meta name='description' content={description} />
         </Helmet>
         <Header />
         <main
@@ -68,6 +72,6 @@ const Layout = ({ children }) => (
         {children}
         </main>
     </>
-);
+);}
 
 export default Layout;
